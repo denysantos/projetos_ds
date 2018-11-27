@@ -31,6 +31,8 @@ if(isset($_POST['cpf']) && !empty($_POST['cpf'])) {
     $numero = addslashes($_POST['numero']);
     
     $p->addPessoa($cpf, $pessoa, $fone, $cep, $numero);
+
+
 ?>
 
 <div class="alert alert-success">
@@ -80,5 +82,61 @@ if(isset($_POST['cpf']) && !empty($_POST['cpf'])) {
             <input type="submit" value="Cadastrar" class="btn btn-success"/>
         </div>
     </form>
+    <div class="col-md-12">
+        <table class="table-borderless">
+            <thead>
+                <tr>
+                    <legend>Pessoas Cadastradas</legend>                    
+                </tr>
+                <tr>
+                    <th class="col-md-1">CPF:</th>
+                    <th class="col-sm-6">Nome:</th>
+                    <th class="col-sm-1">Telefone:</th>
+                    <th class="col-sm-1">CEP:</th>
+                    <th class="col-sm-1">Número:</th>
+                    <th>Ação:</th>
+                </tr>
+            </thead>
+                <?php
+                $pf = new Pessoa();
+                $pessoa = 0;
+                $exibePessoa = $pf->getPessoa($pessoa);
+                foreach ($exibePessoa as $exibirPessoa) {
+
+                ?>
+            <tbody>
+                <tr>
+                    <td class="col-md-1">
+                        <?php echo ($exibirPessoa['nr_cpf']); ?>
+                    </td>
+                    <td class="col-sm-5">
+                        <?php echo ($exibirPessoa['nm_pessoa']); ?>
+                    </td>
+                    <td class="col-sm-1">
+                        <?php echo ($exibirPessoa['fone']); ?>
+                    </td>
+                    <td class="col-sm-1">
+                        <?php echo ($exibirPessoa['cep']); ?>
+                    </td>
+                    <td class="col-sm-1">
+                        <?php echo ($exibirPessoa['numero']); ?>
+                    </td>
+                    <td class="col-md-1">
+                        <a href="editar_pessoa.php?id=<?php echo $exibirPessoa['id'] ?>" class="btn btn-warning">Editar</a>
+                    </td>
+                    <td class="col-md-1">
+                        <a href="excluirPessoa.php?id=<?php echo $exibirPessoa['id']?>" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
+
+                <?php 
+                }
+                ?>
+
+            </tbody>
+        </table>
+
+    </div>
 </div>
+
 <?php require 'pages/footer.php'; ?>

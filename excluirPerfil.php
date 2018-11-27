@@ -1,10 +1,5 @@
 <?php
-require 'config.php';
-if(!empty($_SESSION['cLogin'])){
-    header("Location: login.php");
-    exit;
-}
-
+require 'pages/header.php';
 require 'classes/perfil.class.php';
 
 $a = new Perfil();
