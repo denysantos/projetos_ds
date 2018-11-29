@@ -5,7 +5,6 @@ class Pessoa{
     public function addPessoa($cpf,$pessoa,$fone,$cep,$numero){
         global $pdo;
         
-        //$array = array();
         $sql = $pdo->prepare("INSERT INTO pessoas SET nr_cpf = :cpf, "
                 . "nm_pessoa = :pessoa,"
                 . "fone = :fone,"
@@ -19,17 +18,34 @@ class Pessoa{
         $sql->execute();
     }
 
-    public function getPessoa($pessoa){
+    public function getPessoa($id){
         global $pdo;
 
         $array = array();
 
         $sql = $pdo->prepare("SELECT * FROM pessoas ORDER BY nm_pessoa LIMIT 10");
-        $sql->bindValue(":pessoa", $pessoa);
+        $sql->bindValue(":id", $id);        
         $sql->execute();
 
         if($sql->rowCount() > 0){
             $array = $sql->fetchAll();
+        }
+
+        return $array;
+    }
+
+
+    public function getExibePessoa($id){
+        global $pdo;
+
+        $array = array();
+
+        $sql = $pdo->prepare("SELECT * FROM pessoas WHERE id = :id");
+        $sql->bindValue(":id",$id);
+        $sql->execute();
+
+        if($sql->rowCount() > 0){
+            $array = $sql->fetch();
         }
 
         return $array;
@@ -44,7 +60,7 @@ class Pessoa{
 
     }
 
-    public function editPessoa($cpf,$pessoa,$fone,$cep,$numero){
+    public function editPessoa($cpf,$pessoa,$fone,$cep,$numero,$id){
         global $pdo;        
         
         $sql = $pdo->prepare("UPDATE pessoas 
@@ -59,6 +75,7 @@ class Pessoa{
         $sql->bindValue(":fone",$fone);
         $sql->bindValue(":cep",$cep);
         $sql->bindValue(":numero",$numero);
+        $sql->bindValue(":id",$id);
         $sql->execute();   
     }
 

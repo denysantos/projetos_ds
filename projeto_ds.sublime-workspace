@@ -68,10 +68,28 @@
 	"buffers":
 	[
 		{
+			"file": "/C/xampp/htdocs/classificados/classes/anuncios.class.php",
+			"settings":
+			{
+				"buffer_size": 8124,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/xampp/htdocs/classificados/editar_anuncio.php",
+			"settings":
+			{
+				"buffer_size": 4009,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "classes/pessoaFisica.class.php",
 			"settings":
 			{
-				"buffer_size": 1868,
+				"buffer_size": 2210,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -80,7 +98,7 @@
 			"file": "editar_pessoa.php",
 			"settings":
 			{
-				"buffer_size": 2363,
+				"buffer_size": 3180,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -119,12 +137,14 @@
 	"expanded_folders":
 	[
 		"/C/xampp/htdocs/projetos_ds",
+		"/C/xampp/htdocs/projetos_ds/assets",
 		"/C/xampp/htdocs/projetos_ds/classes"
 	],
 	"file_history":
 	[
-		"/C/xampp/htdocs/projetos_ds/classes/editar_pessoa.php",
 		"/C/xampp/htdocs/classificados/meus_anuncios.php",
+		"/C/xampp/htdocs/projetos_ds/config.php",
+		"/C/xampp/htdocs/projetos_ds/classes/editar_pessoa.php",
 		"/C/xampp/htdocs/classificados/editar_anuncio.php",
 		"/C/xampp/htdocs/projetos_ds/excluirPessoa.php",
 		"/C/xampp/htdocs/classificados/excluir_anuncio.php",
@@ -172,24 +192,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "classes/pessoaFisica.class.php",
+					"file": "/C/xampp/htdocs/classificados/classes/anuncios.class.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1868,
+						"buffer_size": 8124,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1510,
-								1510
+								4334,
+								4334
 							]
 						],
 						"settings":
@@ -199,27 +219,87 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 326.0,
+						"translation.y": 1460.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "editar_pessoa.php",
+					"file": "/C/xampp/htdocs/classificados/editar_anuncio.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2363,
+						"buffer_size": 4009,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2303,
-								2303
+								282,
+								282
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 180.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "classes/pessoaFisica.class.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2210,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2164,
+								2164
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 848.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "editar_pessoa.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3180,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1030,
+								1030
 							]
 						],
 						"settings":
@@ -228,7 +308,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 884.0,
+						"translation.y": 236.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
