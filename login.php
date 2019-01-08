@@ -27,15 +27,20 @@
     ?>
     
     <form method="POST">
-        <div class="form-group">
+        <div class="form-group col-md-6">
             <label for="email">E-mail</label>
             <input type="email" name="email" id="email" class="form-control" />
-        </div>
-        <div class="form-group">
+        </div>        
+        <div class="form-group col-md-12"></div>
+        <div class="form-group col-md-6">
             <label for="senha">Senha</label>
             <input type="password" name="senha" id="senha" class="form-control" />
         </div>
-        <input type="submit" value="Login" class="btn btn-default" />
+        <div class="form-group col-md-12"></div>
+        <div class="form-group col-md-6">
+            <input type="submit" value="Login" class="btn btn-default" />
+        </div>
+        
     </form>
 </div>
 

@@ -2,19 +2,21 @@
 
 class Pessoa{
     
-    public function addPessoa($cpf,$pessoa,$fone,$cep,$numero){
+    public function addPessoa($cpf,$pessoa,$fone,$cep,$numero,$email){
         global $pdo;
         
-        $sql = $pdo->prepare("INSERT INTO pessoas SET nr_cpf = :cpf, "
-                . "nm_pessoa = :pessoa,"
-                . "fone = :fone,"
-                . "cep = :cep,"
-                . "numero = :numero");
+        $sql = $pdo->prepare("INSERT INTO pessoas SET nr_cpf = :cpf,"
+                                                   . "nm_pessoa = :pessoa,"
+                                                   . "fone = :fone,"
+                                                   . "cep = :cep,"
+                                                   . "numero = :numero,"
+                                                   . "email = :email");
         $sql->bindValue(":cpf",$cpf);
         $sql->bindValue(":pessoa",$pessoa);   
         $sql->bindValue(":fone",$fone);
         $sql->bindValue(":cep",$cep);
         $sql->bindValue(":numero",$numero);
+        $sql->bindValue(":email",$email);
         $sql->execute();
     }
 
@@ -23,7 +25,7 @@ class Pessoa{
 
         $array = array();
 
-        $sql = $pdo->prepare("SELECT * FROM pessoas ORDER BY nm_pessoa LIMIT 10");
+        $sql = $pdo->prepare("SELECT * FROM pessoas  ORDER BY id DESC LIMIT 3");
         $sql->bindValue(":id", $id);        
         $sql->execute();
 
@@ -60,7 +62,7 @@ class Pessoa{
 
     }
 
-    public function editPessoa($cpf,$pessoa,$fone,$cep,$numero,$id){
+    public function editPessoa($cpf,$pessoa,$fone,$cep,$numero,$email,$id){
         global $pdo;        
         
         $sql = $pdo->prepare("UPDATE pessoas 
@@ -68,7 +70,8 @@ class Pessoa{
                                      nm_pessoa = :pessoa,
                                      fone = :fone,
                                      cep = :cep,
-                                     numero = :numero
+                                     numero = :numero,
+                                     email = :email
                                WHERE id = :id");
         $sql->bindValue(":cpf",$cpf);
         $sql->bindValue(":pessoa",$pessoa);   
@@ -76,6 +79,7 @@ class Pessoa{
         $sql->bindValue(":cep",$cep);
         $sql->bindValue(":numero",$numero);
         $sql->bindValue(":id",$id);
+        $sql->bindValue(":email",$email);
         $sql->execute();   
     }
 

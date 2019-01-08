@@ -3,6 +3,18 @@
 	[
 		{
 			"path": "."
+		},
+		{
+			"path": "C:\\xampp\\htdocs\\classificados"
+		},
+		{
+			"path": "C:\\xampp\\htdocs\\classificados_mvc"
+		},
+		{
+			"path": "C:\\Users\\ddh\\Downloads\\classificados_mvc(Bonieky)"
+		},
+		{
+			"path": "C:\\Users\\ddh\\Downloads\\classificados_mvc(Aluno)"
 		}
 	]
 }

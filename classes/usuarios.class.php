@@ -72,6 +72,23 @@ class Usuarios {
         }
     }
 
+    public function exibeTodosUsuarios(){
+        global $pdo;
+        
+        $array = array();
+        $sql = $pdo->query("SELECT * FROM usuarios ORDER BY ds_usuario");
+        $sql->execute();
+
+        if($sql->rowCount() > 0){
+            $exibeTodosUsuarios = $sql->fetcAll();
+
+            return $array;
+
+        } else {
+            echo "Não há usuários cadastrados no sistema.";
+        }
+    }
+
 }
 
 

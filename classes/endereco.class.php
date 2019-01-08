@@ -11,7 +11,7 @@ class Endereco{
         $sql->execute();
         
         if($sql->rowCount() > 0){
-            $array =$sql->fetchAll();
+            $array =$sql->fetch();
         }
         
         return $array;

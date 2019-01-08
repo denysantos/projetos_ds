@@ -2,13 +2,15 @@
 
 class Projetos {
 
-    public function getMeusProjetos() {
+    public function getMeusProjetos($id) {
         global $pdo;
 
         $array = array();
         $sql = $pdo->prepare("SELECT *
                                 FROM projetos
-                               WHERE id_usuario = :id_usuario");
+                               WHERE id_usuario = :id_usuario
+                               ORDER BY nm_projeto
+                               ");
         $sql->bindValue(":id_usuario", $_SESSION['cLogin']);
         $sql->execute();
 
@@ -19,6 +21,24 @@ class Projetos {
         return $array;
     }
 
+    public function addProjeto($nm_projeto,$id_usuario) {
+        global $pdo;
+        $sql = $pdo->prepare("INSERT INTO projetos SET nm_projeto = :nm_projeto, id_usuario = :id_usuario");
+        $sql->bindValue(":nm_projeto", $nm_projeto);
+        $sql->bindValue(":id_usuario", $_SESSION['cLogin']);
+        $sql->execute();
+    }
+
+    public function excluirProjeto($id) {
+
+        global $pdo;
+        
+              
+        $sql = $pdo->prepare("DELETE FROM projetos WHERE id = :id");
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+    }    
+    
     public function getProjeto($id) {
         $array = array();
         global $pdo;
@@ -49,37 +69,6 @@ class Projetos {
         return $array;
     }
 
-    public function addProjeto($nm_projeto, $responsavel, $dt_inicio, $dt_fim, $situacao) {
-        global $pdo;
-        $sql = $pdo->prepare(" INSERT INTO projetos "
-                . "   SET nm_projeto = :nm_projeto"
-                . " , id_responsavel = :responsavel"
-                . " , dt_inicio = :dt_inicio"
-                . " , dt_fim = :dt_fim"
-                . " , ie_situacao = :situacao"
-                );
-        $sql->bindValue(":nm_projeto", $nm_projeto);
-        $sql->bindValue(":responsavel", $_SESSION['cLogin']);         
-        $sql->bindValue(":dt_inicio", $dt_inicio);
-        $sql->bindValue(":dt_fim", $dt_fim);
-        $sql->bindValue(":ie_situacao", $situacao);
-        $sql->execute();
-    }
-
-    public function excluirProjeto($id) {
-
-        global $pdo;
-
-
-        $sql = $pdo->prepare("DELETE FROM anuncios_imagens WHERE id_anuncio = :id_anuncio");
-        $sql->bindValue(":id_anuncio", $id);
-        $sql->execute();
-
-        $sql = $pdo->prepare("DELETE FROM anuncios WHERE id = :id");
-        $sql->bindValue(":id", $id);
-        $sql->execute();
-    }
-
     public function editProjeto($titulo, $categoria, $valor, $descricao, $estado, $fotos, $id) {
         global $pdo;
         $sql = $pdo->prepare("UPDATE anuncios
@@ -87,9 +76,9 @@ class Projetos {
                                      id_categoria = :id_categoria,
                                      descricao = :descricao,
                                      valor = :valor,
-                                     estado = :estado                                     
+                                     estado = :estado                              
                                WHERE id = :id");
-        //$sql->bindValue(":id_usuario", $_SESSION['cLogin']);        
+        //$sql->bindValue(":id_usuario", $_SESSION['cLogin']);
         $sql->bindValue(":titulo", $titulo);
         $sql->bindValue(":id_categoria", $categoria);
 		$sql->bindValue(":descricao", $descricao);
@@ -181,7 +170,7 @@ class Projetos {
     public function getTotalProjetos() {
         global $pdo;
 
-        $sql = $pdo->query("SELECT COUNT(*) as c FROM anuncios");
+        $sql = $pdo->query("SELECT COUNT(*) as c FROM projetos");
         $row = $sql->fetch();
 
         return $row['c'];

@@ -9,42 +9,44 @@ if (empty($_SESSION['cLogin'])) {
 ?>
 <div class="container">
     <h1>Meus Projetos</h1>
-    <a href="add_projeto.php" class="btn btn-default">Adicionar Projeto</a>
+    <legend>Cadastros</legend>
+    <div class="col-sm-12">
+        <ul class="nav nav-tabs">
+            <li role="admin" class="active"><a href="meus_projetos.php">Meus Projetos</a></li>
+            <li role="admin"><a href="usuarios.php">Usuários</a></li>
+            <li role="admin"><a href="add_pessoa.php">Pessoas</a></li>
+            <li role="admin"><a href="perfil.php">Perfil</a></li>
+            <li role="admin"><a href="fornecedores.php">Fornecedores</a></li>
+        </ul>
+    </div>
+        <a href="add_projeto.php" class="btn btn-default">Adicionar Projeto</a>    
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Projeto</th>
-                <th>Responsável</th>
-                <th>Status</th>
-                <th>Ações</th>
+                <th>Projetos</th>
             </tr>
-        </thead>
+        </thead>        
         <?php
         require 'classes/projetos.class.php';
         $p = new Projetos();
-        $projetos = $p->getMeusProjetos();
+        $id = 0;
+        $projetos = $p->getMeusProjetos($id);
         foreach ($projetos as $projeto) {
             ?>
+
             <tr>
+                <td><?php echo $projeto['nm_projeto']; ?></td>
                 <td>
-                    <?php if(!empty($projeto['url'])): ?>
-                        <img src="assets/images/projetos/<?php echo $projeto['url']; ?>" height="50" border="0"/>
-                    <?php else: ?>
-                        <img src="assets/images/default.JPG" height="50" border="0" />
-                    <?php endif; ?>
-                </td>
-                <td><?php echo $projeto['titulo']; ?></td>
-                <td>R$ <?php echo number_format($projeto['valor'], 2); ?></td>
-                <td>
-                    <a href="editar_projeto.php?id=<?php echo $projeto['id'] ?>" class="btn btn-success">Editar</a>
-                    <a href="excluir_projeto.php?id=<?php echo $projeto['id'] ?>" class="btn btn-danger">Excluir</a>
+                    <a href="editar_projeto.php?id=<?= $projeto['id'] ?>" class="btn btn-default">Editar</a>
+                    
+                    <a href="excluirProjetos.php?id=<?= $projeto['id'] ?>" class="btn btn-danger">Excluir</a>
+                    <a href="iniciacao.php?id=<?= $projeto['id'] ?>" class="btn btn-warning">Iniciação</a>
                 </td>
                 <?php
             }
             ?>
         </tr>
-
     </table>
-
+    
 </div>
 <?php require 'pages/footer.php'; ?>

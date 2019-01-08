@@ -6,6 +6,7 @@
     <div class="col-sm-12">
         <ul class="nav nav-tabs">
             <li role="admin"><a href="admin.php">Admin</a></li>
+            <li role="admin"><a href="usuarios.php">Usuários</a></li>
             <li role="admin" class="active"><a href="add_pessoa.php">Pessoas</a></li>
             <li role="admin"><a href="perfil.php">Perfil</a></li>
             <li role="admin"><a href="fornecedores.php">Fornecedores</a></li>
@@ -22,6 +23,14 @@ exit;
 
 require 'classes/pessoaFisica.class.php';
 $p = new Pessoa();
+//$totalPessoas = $p->getTotalPessoas();
+$pag = 0;
+
+//$porPagina = 3;
+//$totalPaginas = ceil($totalPessoas / $porPagina);
+//$pessoas = $a->getTotalPessoas();
+
+
 
 if(isset($_POST['cpf']) && !empty($_POST['cpf'])) {
     $cpf = addslashes($_POST['cpf']);
@@ -29,8 +38,9 @@ if(isset($_POST['cpf']) && !empty($_POST['cpf'])) {
     $fone = addslashes($_POST['fone']);
     $cep = addslashes($_POST['cep']);
     $numero = addslashes($_POST['numero']);
+    $email = addslashes($_POST['email']);
     
-    $p->addPessoa($cpf, $pessoa, $fone, $cep, $numero);
+    $p->addPessoa($cpf, $pessoa, $fone, $cep, $numero,$email);
 
 
 ?>
@@ -44,37 +54,31 @@ if(isset($_POST['cpf']) && !empty($_POST['cpf'])) {
 ?>
 
     <form method="POST">
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-2">
             <label for="cpf" name="cpf">CPF:</label>
             <input type="text" name="cpf" id="cpf" class="form-control" />
         </div>
-        <div class="form-group col-sm-9">
+        <div class="form-group col-sm-5">
             <label for="pessoa" name="pessoa">Nome Completo:</label>
             <input type="text" name="pessoa" id="pessoa" class="form-control" />
         </div>
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-2">
             <label for="fone" name="fone">Fone:</label>
-            <input type="text" name="fone" id="fone" class="form-control"/>
+            <input type="text" name="fone" id="fone" class="form-control"/>            
         </div>        
+        <div class="form-group col-sm-3">
+            <label for="email" name="fone">E-mail:</label>
+            <input type="email" name="email" id="email" class="form-control"/>            
+        </div>
         <div class="form-group col-sm-2">
             <label for="cep" name="cep">CEP:</label>
             <input type="text" name="cep" id="cep" class="form-control"/>
         </div>
-        <?php require 'classes/endereco.class.php'; 
-        $cep = 0;
-        $e = new Endereco();
-        $ends = $e->getEndereco($cep);
-        foreach($ends as $end){
-            ?>
-        <div class="form-group col-sm-6">
-            <label for="endereco" name="endereco">Endereço:</label>            
-            <?php echo utf8_encode($end['ds_logradouro']); ?>    
-        </div>        
-        
-            <?php
-        }
-        ?>
-        <div class="form-group col-sm-1">
+        <div class="form-group col-sm-7">
+            <label for="logradouro" name="logradouro">Logradouro:</label>
+            <input type="text" name="logradouro" id="logradouro" class="form-control" disabled />
+        </div>
+        <div class="form-group col-sm-2">
             <label for="numero" name="numero">Número:</label>
             <input type="text" name="numero" id="numero" class="form-control"/>
         </div>
@@ -83,18 +87,19 @@ if(isset($_POST['cpf']) && !empty($_POST['cpf'])) {
         </div>
     </form>
     <div class="col-md-12">
-        <table class="table-borderless">
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <legend>Pessoas Cadastradas</legend>                    
+                    <legend>Últimas Pessoas Cadastradas</legend>                    
                 </tr>
                 <tr>
                     <th class="col-md-1">CPF:</th>
-                    <th class="col-sm-6">Nome:</th>
-                    <th class="col-sm-1">Telefone:</th>
-                    <th class="col-sm-1">CEP:</th>
-                    <th class="col-sm-1">Número:</th>
-                    <th>Ação:</th>
+                    <th class="col-md-6">Nome:</th>
+                    <th class="col-md-1">Telefone:</th>
+                    <th class="col-md-1">E-mail:</th>
+                    <th class="col-md-1">CEP:</th>
+                    <th class="col-md-1">Número:</th>
+                    <th class="col-md-1">Ação:</th>
                 </tr>
             </thead>
                 <?php
@@ -116,6 +121,9 @@ if(isset($_POST['cpf']) && !empty($_POST['cpf'])) {
                         <?php echo ($exibirPessoa['fone']); ?>
                     </td>
                     <td class="col-sm-1">
+                        <?php echo ($exibirPessoa['email']); ?>
+                    </td>
+                    <td class="col-sm-1">
                         <?php echo ($exibirPessoa['cep']); ?>
                     </td>
                     <td class="col-sm-1">
@@ -135,8 +143,15 @@ if(isset($_POST['cpf']) && !empty($_POST['cpf'])) {
 
             </tbody>
         </table>
-
+<!--
+        <ul class="pagination">
+            <?php for($q=1;$q<=$totalPaginas;$q++): ?>
+                <li class="<?php echo ($pag==$q)?'active':''?>">
+                    <a href="add_pessoa.php?p=<?php echo $q ?>"><?php echo $q; ?></a>
+                </li>
+            <?php endfor;?>
+        </ul>
+-->        
     </div>
 </div>
-
 <?php require 'pages/footer.php'; ?>

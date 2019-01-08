@@ -2,7 +2,7 @@
 
 <div class="container">
     <h1>Pessoa Física</h1>
-    <legend>Cadastro</legend>
+    <legend>Cadastro - Edição</legend>
     <div class="col-sm-12">
         <ul class="nav nav-tabs">
             <li role="admin"><a href="admin.php">Admin</a></li>
@@ -30,8 +30,9 @@ if(isset($_POST['cpf']) && !empty($_POST['cpf'])) {
     $fone = addslashes($_POST['fone']);
     $cep = addslashes($_POST['cep']);
     $numero = addslashes($_POST['numero']);
+    $email = addslashes($_POST['email']);
     
-    $p->editPessoa($cpf,$pessoa,$fone,$cep,$numero,$_GET['id']);
+    $p->editPessoa($cpf,$pessoa,$fone,$cep,$numero,$email,$_GET['id']);
     
 ?>
 
@@ -55,38 +56,44 @@ exit;
 }
 ?>
 
+<?php 
+require 'classes/endereco.class.php'; 
+$end = new Endereco();
+
+$exibeEndereco = $end->getEndereco($cep,$_GET['id']);
+
+var_dump($exibeEndereco['cep']);
+
+?>
+
+
+
     <form method="POST">
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-2">
             <label for="cpf" name="cpf">CPF:</label>
             <input type="text" name="cpf" id="cpf" class="form-control" value="<?php echo $info['nr_cpf']; ?>" />
         </div>
-        <div class="form-group col-sm-9">
+        <div class="form-group col-sm-5">
             <label for="pessoa" name="pessoa">Nome Completo:</label>
             <input type="text" name="pessoa" id="pessoa" class="form-control" value="<?php echo $info['nm_pessoa']; ?>" />
         </div>
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-2">
             <label for="fone" name="fone">Fone:</label>
             <input type="text" name="fone" id="fone" class="form-control" value="<?php echo $info['fone']; ?>"/>
         </div>        
+        <div class="form-group col-sm-3">
+            <label for="email" name="email">E-mail:</label>
+            <input type="text" name="email" id="email" class="form-control" value="<?php echo $info['email']; ?>"/>
+        </div>
         <div class="form-group col-sm-2">
             <label for="cep" name="cep">CEP:</label>
             <input type="text" name="cep" id="cep" class="form-control" value="<?php echo $info['cep']; ?>" />
+        </div>                
+        <div class="form-group col-sm-7">
+            <label for="logradouro" name="logradouro">Logradouro:</label>
+            <input type="text" name="logradouro" id="logradouro" class="form-control" disabled />
         </div>
-        <?php require 'classes/endereco.class.php'; 
-        $cep = 0;
-        $e = new Endereco();
-        $ends = $e->getEndereco($cep);
-        foreach($ends as $end){
-            ?>
-        <div class="form-group col-sm-6">
-            <label for="endereco" name="endereco">Endereço:</label>            
-            <?php echo utf8_encode($end['ds_logradouro']); ?>    
-        </div>        
-        
-            <?php
-        }
-        ?>
-        <div class="form-group col-sm-1">
+        <div class="form-group col-sm-2">
             <label for="numero" name="numero">Número:</label>
             <input type="text" name="numero" id="numero" class="form-control" value="<?php echo $info['numero']; ?>"/>
         </div>

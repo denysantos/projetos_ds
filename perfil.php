@@ -6,6 +6,7 @@
     <div class="col-md-12">
         <ul class="nav nav-tabs">
             <li role="admin"><a href="admin.php">Admin</a></li>
+            <li role="admin"><a href="usuarios.php">Usuários</a></li>
             <li role="admin"><a href="add_pessoa.php">Pessoas</a></li>
             <li role="admin" class="active"><a href="perfil.php">Perfil</a></li>
             <li role="admin"><a href="#">Fornecedores</a></li>
